@@ -1,21 +1,73 @@
-*{
+* {
     color: white;
     font-family: "Jersey 10", sans-serif;
     font-weight: 400;
     font-style: normal;
 }
 
-body{
+body {
     background-color: black;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centrar contenido verticalmente */
+    align-items: center; /* Centrar contenido horizontalmente */
+    text-align: center; /* Centrar texto dentro de los elementos */
 }
 
 h1, h2 {
-    margin-left: 35%;
+    margin: 0;
+    padding: 20px 0; /* Añadir un poco de espacio alrededor del título */
+    font-size: 30px; /* Ajustar tamaño de la fuente */
+    text-align: center;
 }
 
-canvas{
-    margin-left: 35%;
-
+canvas {
     background-color: gray;
     border: 5px solid black;
+    margin-top: 20px; /* Añadir un espacio entre el título y el canvas */
+    display: block;
+    margin-left: auto;
+    margin-right: auto; /* Centrar el canvas horizontalmente */
+}
+
+.hidden {
+    display: none;
+}
+
+.game-over {
+    text-align: center;
+    color: white;
+    font-size: 24px;
+}
+
+.game-over button {
+    background-color: #4CAF50;
+    color: white;
+    font-size: 18px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.game-over button:hover {
+    background-color: #45a049;
+}
+
+.menu {
+    text-align: center;
+}
+
+.menu button {
+    background-color: #4CAF50;
+    color: white;
+    font-size: 24px;
+    padding: 20px 40px;
+    border: none;
+    cursor: pointer;
+}
+
+.menu button:hover {
+    background-color: #45a049;
 }

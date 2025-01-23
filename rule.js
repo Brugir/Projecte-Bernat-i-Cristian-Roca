@@ -24,20 +24,66 @@ let snake = [{ x: 200, y: 200 }];
 let food = generateFood();
 let direction = { x: 0, y: 0 };
 let score = 0;
+let gameInterval;
+let currentDirection = "right";
 
-// Variable para determinar la dirección
-let currentDirection = "right"; // Dirección inicial
+// Referencias a elementos HTML
+const menu = document.getElementById("menu");
+const game = document.getElementById("game");
+const gameOver = document.getElementById("gameOver");
+const finalScore = document.querySelector(".final-score");
+
+// Botones del menú
+document.getElementById("startButton").addEventListener("click", startGame);
+
+// Botones de Game Over
+document.getElementById("restartButton").addEventListener("click", () => {
+    resetGame();
+    startGame();
+});
+document.getElementById("menuButton").addEventListener("click", () => {
+    resetGame();
+    showMenu();
+});
 
 // Función principal del juego
 function gameLoop() {
     update();
     if (isGameOver()) {
-        alert("Game Over! Puntuación: " + score);
-        resetGame();
+        clearInterval(gameInterval);
+        showGameOver();
     } else {
         draw();
-        setTimeout(gameLoop, 100); // velocidad del juego
     }
+}
+
+// Función para iniciar el juego
+function startGame() {
+    menu.classList.add("hidden");
+    gameOver.classList.add("hidden");
+    game.classList.remove("hidden");
+
+    score = 0;
+    snake = [{ x: 200, y: 200 }];
+    direction = { x: 0, y: 0 };
+    food = generateFood();
+    currentDirection = "right";  // Dirección inicial
+
+    gameInterval = setInterval(gameLoop, 100); // velocidad del juego
+}
+
+// Función para mostrar el menú principal
+function showMenu() {
+    menu.classList.remove("hidden");
+    game.classList.add("hidden");
+    gameOver.classList.add("hidden");
+}
+
+// Función para mostrar la pantalla de Game Over
+function showGameOver() {
+    gameOver.classList.remove("hidden");
+    game.classList.add("hidden");
+    finalScore.textContent = `Final Score: ${score}`;
 }
 
 // Función para actualizar la posición de la serpiente
@@ -86,9 +132,9 @@ function draw() {
     snake.slice(1).forEach(part => ctx.fillRect(part.x, part.y, blockSize, blockSize));
 
     // Dibujar la manzana
-    const appleX = food.x + (blockSize - 20) / 2; // Ajustar para centrar la manzana
-    const appleY = food.y + (blockSize - 20) / 2; // Ajustar para centrar la manzana
-    ctx.drawImage(appleImage, appleX, appleY, 20, 20); // Tamaño de 20x20
+    const appleX = food.x + (blockSize - 20) / 2;
+    const appleY = food.y + (blockSize - 20) / 2;
+    ctx.drawImage(appleImage, appleX, appleY, 20, 20);
 
     // Actualizar la puntuación
     document.querySelector(".points").textContent = "POINTS: " + score;
@@ -121,6 +167,11 @@ function resetGame() {
 
 // Control de teclas de dirección
 document.addEventListener("keydown", (event) => {
+    // Bloquear el scroll al usar flechas
+    if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(event.key)) {
+        event.preventDefault();
+    }
+
     switch (event.key) {
         case "ArrowUp":
             if (direction.y === 0) {
@@ -147,9 +198,4 @@ document.addEventListener("keydown", (event) => {
             }
             break;
     }
-});
-
-// Iniciar el juego
-addEventListener("load", () => {
-    gameLoop();
 });

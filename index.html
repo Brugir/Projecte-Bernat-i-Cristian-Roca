@@ -3,27 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <link rel="stylesheet" type="text/css" href="CSS/style.css">
-
-    <!-- Tipografia: -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Jersey+10&display=swap');
     </style>
-        
-
     <title>Juego</title>
 </head>
 <body>
 
- 
+    <div id="menu" class="menu">
+        <h1>Snake Game</h1>
+        <button id="startButton">Start Game</button>
+    </div>
 
-    <h1 class="points">POINTS: 0</h1>
-    <canvas id="canvasMap"></canvas>
+    <div id="game" class="game hidden">
+        <h1 class="points">POINTS: 0</h1>
+        <canvas id="canvasMap"></canvas>
+        <h2 class="game-title">SNAKE GAME CREATED BY BERNAT & CRISTIAN ROCA</h2>
+    </div>
 
-
-    <h2 class="game-title">SNAKE GAME CREATED BY BERNAT & CRISTIAN ROCA</h2>
-    
+    <div id="gameOver" class="game-over hidden">
+        <h1>GAME OVER</h1>
+        <p class="final-score">Final Score: 0</p>
+        <button id="restartButton">Restart</button>
+        <button id="menuButton">Go to Menu</button>
+    </div>
 
     <script src="rule.js"></script>
 </body>
